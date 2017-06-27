@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Natural battle</title>
+    <style>
+      .game {
+        background: #efefef;
+        font-size: 16px;
+      }
+
+      .game__error {
+        color: red;
+        position: fixed;
+        top: 16px;
+        right: 16px;
+      }
+
+      /** BEM notation: Entity + Property */
+      .game__entries {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      /** A wrap for independent entry */
+      .game__entry {
+        width: 30%;
+        border: 1px solid gray;
+        box-sizing: border-box;
+      }
+
+      .entry {
+        width: 100%;
+        padding-bottom: 100%;
+        background: yellow;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .entry__progress {
+        position: absolute;
+        top: 45%;
+        left: 45%;
+        font-size: 2rem;
+      }
+
+      .entry__id {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Natural battle</h1>
+    <div id="root"></div>
+  </body>
+</html>
