@@ -5,16 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Natural battle</title>
     <style>
+      html {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
       .game {
-        background: #efefef;
-        font-size: 16px;
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 40px 8px;
       }
 
       .game__error {
         color: red;
-        position: fixed;
+        position: absolute;
         top: 16px;
-        right: 16px;
+        right: 0;
+        left: 0;
+        text-align: center;
+      }
+
+      .game__save, .game__load {
+        width: 50%;
+        display: inline-block;
+      }
+
+      .game__save > button {
+        width: 100%;
+        padding: 8px;
+        text-align: center;
+      }
+
+      .game__load > button {
+        text-align: center;
+        width: 100%;
+        padding: 8px;
+      }
+
+      @keyframes blinker {  
+         50% { opacity: 0; }
+      }
+
+      .game__isSaving {
+         position: absolute;
+         top: 16px;
+         right: 0;
+         left: 0;
+         text-align: center;
+         font-weight: bold;
+         animation: blinker 1s linear infinite;
+      }
+
+      .game__isLoading {
+         position: absolute;
+         top: 16px;
+         right: 0;
+         left: 0;
+         text-align: center;
+         font-weight: bold;
+         animation: blinker 1s linear infinite;
       }
 
       /** BEM notation: Entity + Property */
@@ -30,23 +89,35 @@
 
       /** A wrap for independent entry */
       .game__entry {
-        width: 30%;
-        border: 1px solid gray;
-        box-sizing: border-box;
-      }
-
-      .entry {
-        width: 100%;
-        padding-bottom: 100%;
-        background: yellow;
-        cursor: pointer;
+        width: 25%;
+        border: 1px solid #ccc;
         position: relative;
       }
 
+      .game__entry::before {
+        content: '';
+        padding-top: 100%;
+        display: block;
+      }
+
+      .entry {
+        position:  absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        cursor: pointer;
+        background: #eee;
+        text-align: center;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+      }
+
       .entry__progress {
-        position: absolute;
-        top: 45%;
-        left: 45%;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
         font-size: 2rem;
       }
 
@@ -54,11 +125,11 @@
         position: absolute;
         top: 4px;
         right: 4px;
+        font-size: 0.6rem;
       }
     </style>
   </head>
   <body>
-    <h1>Natural battle</h1>
     <div id="root"></div>
   </body>
 </html>

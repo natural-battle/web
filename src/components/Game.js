@@ -29,21 +29,24 @@ class Game extends Component {
         </li>
       )
     ) : (
-        <em>No entries</em>
+        <li>...</li>
     )
+
+    const isDisabled = game.isSaving || game.isLoading;
 
     return (
       <div className="game">
         <div className="game__error">{game.error}</div>
-        <div>
-          isSaving={String(game.isSaving)}
-          <button onClick={() => onSaveGame(game)}>Save game</button>
+        <div className="game__save">
+          <button disabled={isDisabled} onClick={() => onSaveGame(game)}>Save game</button>
         </div>
-        <div>
-          isLoading={String(game.isLoading)}
-          <button onClick={() => onLoadGame()}>Load game</button>
+        { game.isSaving ?
+          <div className="game__isSaving">saving...</div> : null }
+        <div className="game__load">
+          <button disabled={isDisabled} onClick={() => onLoadGame()}>Load game</button>
         </div>
-        <div>entries.length={game.entries.length}</div>
+        { game.isLoading ?
+          <div className="game__isLoading">loading...</div> : null }
         <ul className="game__entries">
           {nodes}
         </ul>

@@ -3,18 +3,30 @@
  *   the target object instead of array
  */
 
-const API_ENDPOINT = 'http://127.0.0.1:10010/game';
+// relative to the index page
+
+// const API_ENDPOINT = 'http://localhost:10010/game';
+const API_ENDPOINT = './game';
+
+const DEMO_TIMEOUT = 1200;
 
 const send = (url, opts) => {
   if (fetch) {
-    return fetch(url, opts)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-
-        return response.json();
-      });
+    return new Promise(function (resolve, reject) { 
+      fetch(url, opts)
+        .then(response => {
+          if (!response.ok) {
+            reject(new Error(response.statusText));
+            return;
+          }
+          return response.json();
+        })
+        .then(result => {
+          setTimeout(function () { 
+            resolve(result);
+          }, DEMO_TIMEOUT);
+        });
+    });
   } else {
     throw new Error('API requests are not supported by this browser');
   }
